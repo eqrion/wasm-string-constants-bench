@@ -63,3 +63,13 @@ print(JSON.stringify(strings));
   )`);
   os.file.writeTypedArrayToFile("array.wasm", binary);
 }
+
+{
+  // String section
+  let text =`(module
+    ${strings.map((x, i) => `(string \"${x}\")`).join("\n")}
+  )`;
+  let binary = wasmTextToBinary(text);
+  print(text);
+  os.file.writeTypedArrayToFile("string_section.wasm", binary);
+}
